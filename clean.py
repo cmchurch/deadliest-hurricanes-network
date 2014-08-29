@@ -345,3 +345,19 @@ text = re.sub('[A-Z].+:','',text)
 for key in dict.keys():
     text = re.sub(key,dict[key],text)
 print text
+
+#CREATE A NODES TABLE THAT INCLUDES THE TOTAL NUMBER OF HURRICANES AFFECTING EACH LOCATION
+import re
+import collections
+f = open('/home/cmchurch/I_Drive/Documents/Gephi/Hurricanes_edges_adjacency-list.csv','r')
+text = f.read()
+f.close()
+text = re.sub(',','',text)
+text = re.sub('\r\n','',text)
+text = re.sub('""','","',text)
+text = re.sub('"','',text)
+data = text.split(',')
+counter=collections.Counter(data)
+print '"ID","WEIGHT"'
+for key in counter.keys():
+    print '"'+key+'"'+','+str(counter[key])
